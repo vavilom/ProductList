@@ -45,7 +45,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         $http.post(serviceBase + 'api/login/', data, { headers: { 'Content-Type': 'application/json' } }).then(function (response) {
             if (response.data.success) {
-                localStorageService.set('authorizationData', { token: response.token, userName: loginData.userName });
+                localStorageService.set('authorizationData', { token: response.data.token, userName: loginData.userName });
 
                 _authentication.isAuth = true;
                 _authentication.userName = loginData.userName;

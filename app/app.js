@@ -16,6 +16,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/signup.html"
     });
 
+    $routeProvider.when("/home/:productId", {
+        controller: "homeController",
+        templateUrl: "/app/views/productDetail.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 });
 

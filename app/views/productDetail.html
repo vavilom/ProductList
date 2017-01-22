@@ -1,0 +1,28 @@
+﻿<div ng-controller="productsInfoCtrl">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <div product></div>
+                </div>
+                <div class="col-md-7">
+                    <form role="form">
+                        <h4 class="form-login-heading">Add review</h4>
+                        <div star-rating ng-model="reviewData.rate" max="5"></div>
+                        <input type="text" class="form-control" placeholder="Review" ng-model="reviewData.text" required autofocus>
+                        <button class="btn btn-md btn-info btn-block" type="submit" ng-click="saveReview()">Add review</button>
+                        <div data-ng-hide="message == ''" class="alert alert-danger">
+                            {{message}}
+                        </div>
+                    </form>
+
+                    <h2>Reviews:</h2>
+                    <div reviews></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

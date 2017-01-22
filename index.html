@@ -32,6 +32,25 @@
         </div>
     </div>
 
+    <script type="text/ng-template" id="productTemplate">
+        <img ng-src="{{getImageUrl(products[productId-1].img)}}" />
+        <h3>{{products[productId-1].title}}</h3>
+        <p>{{products[productId-1].text}}</p>
+    </script>
+    <script type="text/ng-template" id="reviewsTemplate">
+        <div ng-repeat="review in reviews | orderBy:dateValue('created_at'):true">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>{{review.created_by.username}}</span>
+                    <span>{{review.rate}}</span>
+                </div>
+                <div class="panel-body">
+                    <p>{{review.text}}</p>
+                    <span>{{review.created_at | date : "MMM d, y h:mm:ss a"}}</span>
+                </div>
+            </div>
+        </div>
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
     <script src="scripts/vendors/angular-local-storage.min.js"></script>
@@ -39,11 +58,13 @@
     <script src="app/services/authInterceptorService.js"></script>
     <script src="app/services/authService.js"></script>
     <script src="app/services/productsService.js"></script>
+    <script src="app/directives/rateDirective.js"></script>
+    <script src="app/controllers/productsController.js"></script>
     <script src="app/controllers/homeController.js"></script>
+    <script src="app/controllers/productInfoController.js"></script>
     <script src="app/controllers/indexController.js"></script>
     <script src="app/controllers/signupController.js"></script>
     <script src="app/controllers/loginController.js"></script>
-    <script src="app/controllers/productsController.js"></script>
 </body>
 </html>
 
