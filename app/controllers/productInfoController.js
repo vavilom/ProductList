@@ -2,12 +2,13 @@
 
 app.controller('productsInfoCtrl', function ($scope, productsService, ngAuthSettings, $routeParams, authService) {
     $scope.products = {};
-    $scope.reviews = [];
+    $scope.reviews = {};
     $scope.productId = $routeParams.productId;
     $scope.reviewData = {
         rate: 1
     };
     $scope.message = "";
+    $scope.authentication = authService.authentication;
 
     $scope.getImageUrl = function (prodImg) {
         return ngAuthSettings.apiServiceBaseUri + "static/" + prodImg;
@@ -26,39 +27,25 @@ app.controller('productsInfoCtrl', function ($scope, productsService, ngAuthSett
     };
 
     $scope.saveReview = function () {
-        var newReview = {
-            created_by: {
-                "username": authService.authentication.userName
-            },
-            rate: $scope.reviewData.rate,
-            text: $scope.reviewData.text,
-            created_at: new Date().toString(),
-            id: 3333
-        };
+        productsService.addReview($scope.productId, $scope.reviewData).then(function (results) {
+            if (results.status == 200) {
+                var newReview = {
+                    created_by: {
+                        "username": $scope.authentication.userName
+                    },
+                    rate: $scope.reviewData.rate,
+                    text: $scope.reviewData.text,
+                    created_at: new Date()
+                };
 
-        $scope.reviews.push(newReview);
+                $scope.reviews.push(newReview);
 
-        console.log($scope.reviews);
-
-        //productsService.addReview($scope.productId, $scope.reviewData).then(function (results) {
-        //    if (results.status == 200) {
-        //        var newReview = {
-        //            created_by: {
-        //                "username": authService.authentication.userName
-        //            },
-        //            rate: $scope.reviewData.rate,
-        //            text: $scope.reviewData.text,
-        //            created_at: new Date()
-        //        };
-
-        //        $scope.reviews.push(newReview);
-
-        //        $scope.reviewData = {};
-        //    }
-        //},
-        //function () {
-        //    $scope.message = "Error";
-        //});
+                $scope.reviewData = {};
+            }
+        },
+        function () {
+            $scope.message = "Error";
+        });
     }
 });
 

@@ -5,8 +5,9 @@
                 <div class="col-md-5">
                     <div product></div>
                 </div>
+                <hr />
                 <div class="col-md-7">
-                    <form role="form">
+                    <form ng-if="authentication.isAuth" role="form">
                         <h4 class="form-login-heading">Add review</h4>
                         <div star-rating ng-model="reviewData.rate" max="5"></div>
                         <input type="text" class="form-control" placeholder="Review" ng-model="reviewData.text" required autofocus>
@@ -15,6 +16,7 @@
                             {{message}}
                         </div>
                     </form>
+                    <p ng-if="!authentication.isAuth">*you should sign in for adding review</p>
 
                     <h2>Reviews:</h2>
                     <div reviews></div>

@@ -42,11 +42,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span>{{review.created_by.username}}</span>
+                    <span class="rate-box" star-rating ng-model="review.rate" readonly="true"></span>
                     <span>{{review.rate}}</span>
                 </div>
                 <div class="panel-body">
                     <p>{{review.text}}</p>
-                    <span>{{review.created_at | date : "MMM d, y h:mm:ss a"}}</span>
+                    <span class="rate-date">{{review.created_at | date : "MMM d, y h:mm:ss a"}}</span>
                 </div>
             </div>
         </div>

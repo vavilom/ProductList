@@ -52,6 +52,11 @@ body {
     border-top-right-radius: 0;
 }
 
+.rate-date{
+    font-size: 12px;
+    color: #808080;
+}
+
 /*style stars*/
 
 .star-rating {
@@ -71,8 +76,8 @@ body {
 .star-rating .star.filled {
   color: #fd0;
 }
-.star-rating.readonly .star.filled {
-  color: #666;
+
+
+.rate-box{
+    margin-left: 15px;
 }
-
-
