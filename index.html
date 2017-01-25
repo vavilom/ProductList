@@ -38,7 +38,7 @@
         <p>{{product.text}}</p>
     </script>
     <script type="text/ng-template" id="reviewsTemplate">
-        <div ng-repeat="review in reviews | orderBy:dateValue('created_at'):true">
+        <div ng-repeat="review in reviews | orderBy:dateValue:true">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span>{{review.created_by.username}}</span>

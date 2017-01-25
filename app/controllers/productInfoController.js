@@ -72,8 +72,8 @@ app.directive('reviews', function () {
             reviews: "=reviews"
         },
         controller: function ($scope) {
-            $scope.dateValue = function (date) {
-                return Date.parse(date);
+            $scope.dateValue = function (review) {
+                return Date.parse(review.created_at);
             };
         }
     };
