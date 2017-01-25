@@ -1,4 +1,4 @@
-﻿<form role="form">
+﻿<form name="loginForm" ng-submit="login()" novalidate>
     <div class="row">
         <div class="col-md-4">
             &nbsp;
@@ -7,7 +7,7 @@
             <h2 class="form-login-heading">Login</h2>
             <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
             <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
-            <button class="btn btn-md btn-info btn-block" type="submit" data-ng-click="login()">Login</button>
+            <button class="btn btn-md btn-info btn-block" type="submit">Login</button>
             <div data-ng-hide="message == ''" class="alert alert-danger">
                 {{message}}
             </div>

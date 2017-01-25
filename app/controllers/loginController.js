@@ -9,15 +9,19 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
     $scope.message = "";
 
     $scope.login = function () {
-        authService.login($scope.loginData).then(function (response) {
-            if (response.isAuth) {
-                $location.path('/home');
-            }
-            
-            $scope.message = response.message;
-        },
-        function (err) {
-            $scope.message = err.message;
-        });
+        if($scope.loginForm.$valid){
+            authService.login($scope.loginData).then(function (response) {
+                if (response.isAuth) {
+                    $location.path('/home');
+                }
+
+                $scope.message = response.message;
+            },
+            function (err) {
+                $scope.message = err.message;
+            });
+        } else {
+            $scope.message = "Fill all data";
+        }
     };
 }]);

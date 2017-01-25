@@ -10,6 +10,8 @@ app.controller('productsInfoCtrl', function ($scope, productsService, ngAuthSett
     $scope.message = "";
     $scope.authentication = authService.authentication;
 
+    console.log("start controller");
+
     $scope.getImageUrl = function (prodImg) {
         return ngAuthSettings.apiServiceBaseUri + "static/" + prodImg;
     };
@@ -27,25 +29,27 @@ app.controller('productsInfoCtrl', function ($scope, productsService, ngAuthSett
     };
 
     $scope.saveReview = function () {
-        productsService.addReview($scope.productId, $scope.reviewData).then(function (results) {
-            if (results.status == 200) {
-                var newReview = {
-                    created_by: {
-                        "username": $scope.authentication.userName
-                    },
-                    rate: $scope.reviewData.rate,
-                    text: $scope.reviewData.text,
-                    created_at: new Date()
-                };
+        if ($scope.reviewForm.$valid) {
+            productsService.addReview($scope.productId, $scope.reviewData).then(function (results) {
+                if (results.status == 200) {
+                    var newReview = {
+                        created_by: {
+                            "username": $scope.authentication.userName
+                        },
+                        rate: $scope.reviewData.rate,
+                        text: $scope.reviewData.text,
+                        created_at: new Date()
+                    };
 
-                $scope.reviews.push(newReview);
+                    $scope.reviews.push(newReview);
 
-                $scope.reviewData = {};
-            }
-        },
-        function () {
-            $scope.message = "Error";
-        });
+                    $scope.reviewData = { rate: 1 };
+                }
+            },
+            function (err) {
+                $scope.message = "Error";
+            });
+        }
     }
 });
 

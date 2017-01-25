@@ -7,11 +7,11 @@
                 </div>
                 <hr />
                 <div class="col-md-7">
-                    <form ng-if="authentication.isAuth" role="form">
+                    <form name="reviewForm" ng-submit="saveReview()" novalidate ng-show="authentication.isAuth">
                         <h4 class="form-login-heading">Add review</h4>
                         <div star-rating ng-model="reviewData.rate" max="5"></div>
                         <input type="text" class="form-control" placeholder="Review" ng-model="reviewData.text" required autofocus>
-                        <button class="btn btn-md btn-info btn-block" type="submit" ng-click="saveReview()">Add review</button>
+                        <button class="btn btn-md btn-info btn-block" type="submit" ng-disabled="reviewForm.$invalid">Add review</button>
                         <div data-ng-hide="message == ''" class="alert alert-danger">
                             {{message}}
                         </div>
