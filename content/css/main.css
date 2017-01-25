@@ -57,6 +57,11 @@ body {
     color: #808080;
 }
 
+.error{
+    color: red;
+    padding-left: 10px;
+}
+
 /*style stars*/
 
 .star-rating {

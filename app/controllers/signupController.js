@@ -2,15 +2,26 @@
 app.controller('signupController', ['$scope', '$location', '$timeout', 'authService', function ($scope, $location, $timeout, authService) {
     $scope.savedSuccessfully = false;
     $scope.message = "";
-
     $scope.registration = {
         userName: "",
         password: "",
         confirmPassword: ""
     };
 
+    $scope.getError = function (error) {
+        if (angular.isDefined(error)) {
+            if (error.required) {
+                return "Please enter a value";
+            } else if (error.email) {
+                return "Please enter a valid email address";
+            } else if (error.compareTo) {
+                return "Passwords don't match";
+            }
+        }
+    };
+
     $scope.signUp = function () {
-        if ($scope.registration.password === $scope.registration.confirmPassword) {
+        if ($scope.signUpForm.$valid) {
             var dataRegistration = {
                 username: $scope.registration.userName,
                 password: $scope.registration.password
@@ -19,15 +30,15 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
             authService.saveRegistration(dataRegistration).then(function (response) {
                 $scope.savedSuccessfully = response.isAuth;
                 $scope.message = response.message;
-                startTimer();
+                if(response.isAuth) startTimer();
             },
             function (response) {
-                $scope.message = "Failed to register user.";
+                $scope.message = response.message;
             });
+        } else {
+            $scope.showValidation = true;
         }
-        else {
-            $scope.message = "Confirm password not equal password.";
-        }
+        
     };
 
     var startTimer = function () {

@@ -12,25 +12,29 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     authServiceFactory.saveRegistration = function (registration) {
         _logOut();
+        var usName = registration.username;
 
         return $http.post(serviceBase + 'api/register/', registration).then(function (response) {
             if (response.data.success) {
-                localStorageService.set('authorizationData', { token: response.data.token, userName: loginData.userName });
+                localStorageService.set('authorizationData', { token: response.data.token, userName: usName });
 
                 _authentication.isAuth = true;
-                _authentication.userName = loginData.userName;
+                _authentication.userName = usName;
+
+                return {
+                    isAuth: true,
+                    message: "User has been registered successfully, you will be redicted to home page in 2 seconds."
+                };
             }
             else {
-                return { isAuth: false, message: "Failed to register user." };
+                return { isAuth: false, message: response.data.message };
             }
-
-            return {
-                isAuth: true,
-                message: "User has been registered successfully, you will be redicted to login page in 2 seconds."
-            };
         },
         function (response) {
-            console.log(response);
+            return {
+                isAuth: false,
+                message: response.data.message
+            };
         });
 
     };

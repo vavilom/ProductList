@@ -2,7 +2,7 @@
 
 app.controller('productsInfoCtrl', function ($scope, productsService, ngAuthSettings, $routeParams, authService) {
     $scope.products = {};
-    $scope.reviews = {};
+    $scope.reviews = [];
     $scope.productId = $routeParams.productId;
     $scope.reviewData = {
         rate: 1
