@@ -6,15 +6,18 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
         password: "",
         useRefreshTokens: false
     };
-
     $scope.message = "";
 
     $scope.login = function () {
         authService.login($scope.loginData).then(function (response) {
-            $location.path('/home');
+            if (response.isAuth) {
+                $location.path('/home');
+            }
+            
+            $scope.message = response.message;
         },
-         function (err) {
-             $scope.message = err.error_description;
-         });
+        function (err) {
+            $scope.message = err.message;
+        });
     };
 }]);

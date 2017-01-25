@@ -54,15 +54,25 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 _authentication.isAuth = true;
                 _authentication.userName = loginData.userName;
 
-                deferred.resolve(response);
+                deferred.resolve({
+                    isAuth: true,
+                    message: "User has been login successfully, you will be redicted to home page."
+                });
             }
             else {
                 _logOut();
+                deferred.reject({
+                    isAuth: false,
+                    message: response.data.message
+                });
             }
         },
         function (err, status) {
             _logOut();
-            deferred.reject(err);
+            deferred.reject({
+                isAuth: false,
+                message: response.data.message
+            });
         });
 
         return deferred.promise;
