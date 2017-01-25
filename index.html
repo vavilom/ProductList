@@ -21,7 +21,7 @@
                     <li ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
                     <li ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
                     <li ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
-                    <li ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
+                    <li ng-hide="authentication.isAuth"> <a href="/#/signup">Sign Up</a></li>
                 </ul>
             </div>
         </div>
@@ -33,9 +33,9 @@
     </div>
 
     <script type="text/ng-template" id="productTemplate">
-        <img ng-src="{{getImageUrl(products[productId-1].img)}}" />
-        <h3>{{products[productId-1].title}}</h3>
-        <p>{{products[productId-1].text}}</p>
+        <img ng-src="{{getImageUrl(product.img)}}" />
+        <h3>{{product.title}}</h3>
+        <p>{{product.text}}</p>
     </script>
     <script type="text/ng-template" id="reviewsTemplate">
         <div ng-repeat="review in reviews | orderBy:dateValue('created_at'):true">

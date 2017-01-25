@@ -12,10 +12,7 @@ app.controller('productsInfoCtrl', function ($scope, productsService, ngAuthSett
 
     console.log("start controller");
 
-    $scope.getImageUrl = function (prodImg) {
-        return ngAuthSettings.apiServiceBaseUri + "static/" + prodImg;
-    };
-
+    //get all products because not opportunity get one product by id
     productsService.getProducts().then(function (results) {
         $scope.products = results.data;
     });
@@ -23,10 +20,6 @@ app.controller('productsInfoCtrl', function ($scope, productsService, ngAuthSett
     productsService.getReviews($scope.productId).then(function (results) {
         $scope.reviews = results.data;
     });
-
-    $scope.dateValue = function (date) {
-        return Date.parse(date);
-    };
 
     $scope.saveReview = function () {
         if ($scope.reviewForm.$valid) {
@@ -57,14 +50,31 @@ app.directive('product', function () {
     return {
         template: function () {
             return angular.element(document.querySelector("#productTemplate")).html();
+        },
+        scope: {
+            product: "=product"
+        },
+        controller: function ($scope, ngAuthSettings) {
+            $scope.getImageUrl = function (prodImg) {
+                return ngAuthSettings.apiServiceBaseUri + "static/" + prodImg;
+            };
         }
     };
 });
 
 app.directive('reviews', function () {
     return {
+        restrict: "A",
         template: function () {
             return angular.element(document.querySelector("#reviewsTemplate")).html();
+        },
+        scope: {
+            reviews: "=reviews"
+        },
+        controller: function ($scope) {
+            $scope.dateValue = function (date) {
+                return Date.parse(date);
+            };
         }
     };
 });
