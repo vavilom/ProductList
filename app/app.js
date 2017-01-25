@@ -17,7 +17,7 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/home/:productId", {
-        controller: "productInfoController",
+        controller: "productsInfoCtrl",
         templateUrl: "/app/views/productDetail.html"
     });
 

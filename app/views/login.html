@@ -1,9 +1,6 @@
 ﻿<form name="loginForm" ng-submit="login()" novalidate>
-    <div class="row">
-        <div class="col-md-4">
-            &nbsp;
-        </div>
-        <div class="col-md-4">
+    <div class="container">
+        <div class="form-login">
             <h2 class="form-login-heading">Login</h2>
             <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
             <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
@@ -11,9 +8,6 @@
             <div data-ng-hide="message == ''" class="alert alert-danger">
                 {{message}}
             </div>
-        </div>
-        <div class="col-md-4">
-            &nbsp;
         </div>
     </div>
 </form>
